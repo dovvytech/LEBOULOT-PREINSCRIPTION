@@ -1,128 +1,133 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-
-function Section({ id, children, className = '' }: { id?: string; children: React.ReactNode; className?: string }) {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  return (
-    <motion.section
-      id={id}
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
-      className={`py-20 lg:py-28 px-4 sm:px-6 lg:px-8 ${className}`}
-    >
-      <div className="max-w-6xl mx-auto">
-        {children}
-      </div>
-    </motion.section>
-  );
-}
 
 export function AboutSection() {
   return (
-    <Section id="apropos">
+    <section id="apropos" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto text-center">
-        <h2 className="font-[family-name:var(--font-family-display)] text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-          Un problème <span className="text-leboulot-green">réel</span>
-        </h2>
-        <p className="text-lg text-gray-400 leading-relaxed mb-6">
-          En Afrique, les talents sont partout mais les opportunités restent concentrées. 
-          Les freelances peinent à se faire connaître. Les entreprises cherchent des compétences fiables sans savoir où les trouver.
-        </p>
-        <p className="text-lg text-gray-400 leading-relaxed">
-          <strong className="text-white">LEBOULOT</strong> connecte les freelances et les clients sur une plateforme pensée pour nos réalités : paiements locaux, confiance, accessibilité.
-        </p>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="font-[family-name:var(--font-family-display)] text-3xl sm:text-4xl font-bold mb-6"
+        >
+          Une plateforme pensée pour <span className="text-leboulot-green">l'Afrique</span>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="text-lg text-gray-400 leading-relaxed"
+        >
+          LEBOULOT connecte les freelances et les clients sur une plateforme adaptée à nos réalités : 
+          paiements locaux, confiance, accessibilité.
+        </motion.p>
       </div>
-    </Section>
+    </section>
   );
 }
 
 export function AdvantagesSection() {
-  return (
-    <Section id="avantages">
-      <div className="text-center mb-16">
-        <h2 className="font-[family-name:var(--font-family-display)] text-3xl sm:text-4xl font-bold">
-          Pourquoi rejoindre <span className="text-leboulot-green">LEBOULOT</span> ?
-        </h2>
-      </div>
+  const advantages = [
+    { title: 'Accès prioritaire', desc: 'Soyez parmi les premiers dès l\'ouverture' },
+    { title: 'Paiements adaptés', desc: 'Mobile money, virement local' },
+    { title: 'Rayonnement continental', desc: 'Travaillez dans toute l\'Afrique' },
+  ];
 
-      <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-        <AdvantageCard
-          title="Accès prioritaire"
-          description="Soyez parmi les premiers à utiliser la plateforme dès son ouverture dans votre pays."
-        />
-        <AdvantageCard
-          title="Visibilité ciblée"
-          description="Votre profil est vu par des clients qui cherchent exactement vos compétences."
-        />
-        <AdvantageCard
-          title="Paiements adaptés"
-          description="Mobile money, virement local — les modes de paiement que vous utilisez déjà."
-        />
-        <AdvantageCard
-          title="Rayonnement continental"
-          description="Travaillez avec des clients dans toute l'Afrique et dans la diaspora."
-        />
-        <AdvantageCard
-          title="Tarifs préférentiels"
-          description="Conditions avantageuses réservées aux premiers inscrits."
-        />
-        <AdvantageCard
-          title="Influencez le projet"
-          description="Vos besoins façonnent la plateforme. Rejoignez une communauté de talents africains."
-        />
-      </div>
-    </Section>
-  );
-}
-
-function AdvantageCard({ title, description }: { title: string; description: string }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="glass rounded-2xl p-6 hover:border-leboulot-green/30 transition-all duration-300"
-    >
-      <h3 className="font-semibold text-xl mb-3 text-white">{title}</h3>
-      <p className="text-gray-400 leading-relaxed">{description}</p>
-    </motion.div>
+    <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="font-[family-name:var(--font-family-display)] text-3xl sm:text-4xl font-bold text-center mb-12"
+        >
+          Pourquoi nous rejoindre ?
+        </motion.h2>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {advantages.map((adv, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="glass rounded-xl p-6 text-center"
+            >
+              <h3 className="font-semibold text-xl mb-2 text-white">{adv.title}</h3>
+              <p className="text-gray-400">{adv.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
 export function HowItWorks() {
-  const steps = [
-    { num: '01', title: 'Inscrivez-vous', desc: 'Rejoignez la liste de lancement en quelques secondes. Gratuit et sans engagement.' },
-    { num: '02', title: 'Soyez informé', desc: 'Recevez un message dès que la plateforme ouvre. Accès prioritaire réservé aux inscrits.' },
-    { num: '03', title: 'Commencez', desc: 'Créez votre profil, publiez vos missions ou proposez vos services.' },
-  ];
-
   return (
-    <Section>
-      <div className="text-center mb-16">
-        <h2 className="font-[family-name:var(--font-family-display)] text-3xl sm:text-4xl font-bold">
+    <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="font-[family-name:var(--font-family-display)] text-3xl sm:text-4xl font-bold mb-12"
+        >
           Comment ça marche
-        </h2>
-      </div>
-      <div className="grid md:grid-cols-3 gap-8">
-        {steps.map((step, i) => (
+        </motion.h2>
+
+        <div className="space-y-8">
           <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.15 }}
-            className="text-center"
+            className="flex items-start gap-4 text-left"
           >
-            <div className="text-5xl lg:text-6xl font-bold text-leboulot-green/20 font-[family-name:var(--font-family-display)] mb-4">
-              {step.num}
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-leboulot-green/20 flex items-center justify-center text-leboulot-green font-bold">
+              1
             </div>
-            <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
-            <p className="text-gray-400 leading-relaxed">{step.desc}</p>
+            <div>
+              <h3 className="font-semibold text-lg mb-1">Inscrivez-vous</h3>
+              <p className="text-gray-400">Rejoignez la liste en quelques secondes. Gratuit et sans engagement.</p>
+            </div>
           </motion.div>
-        ))}
+
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="flex items-start gap-4 text-left"
+          >
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-leboulot-green/20 flex items-center justify-center text-leboulot-green font-bold">
+              2
+            </div>
+            <div>
+              <h3 className="font-semibold text-lg mb-1">Soyez informé</h3>
+              <p className="text-gray-400">Recevez un message dès l'ouverture. Accès prioritaire garanti.</p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="flex items-start gap-4 text-left"
+          >
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-leboulot-green/20 flex items-center justify-center text-leboulot-green font-bold">
+              3
+            </div>
+            <div>
+              <h3 className="font-semibold text-lg mb-1">Commencez</h3>
+              <p className="text-gray-400">Créez votre profil et connectez-vous aux opportunités.</p>
+            </div>
+          </motion.div>
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }
