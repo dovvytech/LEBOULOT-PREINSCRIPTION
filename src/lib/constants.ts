@@ -1,0 +1,61 @@
+export const COUNTRIES = [
+  { code: 'CI', name: "Côte d'Ivoire", dialCode: '+225' },
+  { code: 'SN', name: 'Sénégal', dialCode: '+221' },
+  { code: 'CM', name: 'Cameroun', dialCode: '+237' },
+  { code: 'BF', name: 'Burkina Faso', dialCode: '+226' },
+  { code: 'ML', name: 'Mali', dialCode: '+223' },
+  { code: 'BJ', name: 'Bénin', dialCode: '+229' },
+  { code: 'TG', name: 'Togo', dialCode: '+228' },
+  { code: 'NE', name: 'Niger', dialCode: '+227' },
+  { code: 'GN', name: 'Guinée', dialCode: '+224' },
+  { code: 'GA', name: 'Gabon', dialCode: '+241' },
+  { code: 'CG', name: 'Congo-Brazzaville', dialCode: '+242' },
+  { code: 'CD', name: 'RD Congo', dialCode: '+243' },
+  { code: 'MG', name: 'Madagascar', dialCode: '+261' },
+  { code: 'MA', name: 'Maroc', dialCode: '+212' },
+  { code: 'TN', name: 'Tunisie', dialCode: '+216' },
+  { code: 'DZ', name: 'Algérie', dialCode: '+213' },
+  { code: 'RW', name: 'Rwanda', dialCode: '+250' },
+  { code: 'KE', name: 'Kenya', dialCode: '+254' },
+  { code: 'NG', name: 'Nigeria', dialCode: '+234' },
+  { code: 'GH', name: 'Ghana', dialCode: '+233' },
+  { code: 'ET', name: 'Éthiopie', dialCode: '+251' },
+  { code: 'ZA', name: 'Afrique du Sud', dialCode: '+27' },
+  { code: 'FR', name: 'France', dialCode: '+33' },
+  { code: 'BE', name: 'Belgique', dialCode: '+32' },
+  { code: 'CA', name: 'Canada', dialCode: '+1' },
+  { code: 'US', name: 'États-Unis', dialCode: '+1' },
+  { code: 'OTHER', name: 'Autre', dialCode: '' },
+];
+
+export const DOMAINS = [
+  'Développement web & mobile',
+  'Design graphique & UI/UX',
+  'Marketing digital',
+  'Rédaction & traduction',
+  'Vidéo & photographie',
+  'Comptabilité & finance',
+  'Consulting & stratégie',
+  'E-commerce & vente',
+  'Formation & coaching',
+  'Logistique & transport',
+  'BTP & artisanat',
+  'Santé & bien-être',
+  'Juridique & conformité',
+  'Autre',
+];
+
+export const TRACKING_STATUS_LABELS: Record<string, string> = {
+  new: 'Nouveau',
+  to_contact: 'À contacter',
+  contacted: 'Contacté',
+  invited: 'Invité',
+  unsubscribed: 'Désabonné',
+};
+
+export const PROFILE_LABELS: Record<string, string> = {
+  freelance: 'Freelance',
+  client: 'Client / Recruteur',
+  both: 'Les deux',
+  other: 'Autre',
+};
