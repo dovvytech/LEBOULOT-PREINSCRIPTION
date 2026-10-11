@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { COUNTRIES, DOMAINS } from '../lib/constants';
 import { validatePhone } from '../lib/phone';
 import { createPreinscription } from '../lib/storage';
+import { sendWhatsApp } from '../lib/whatsapp';
 import type { ProfileType, ContactChannel, PreinscriptionInput } from '../types';
 
 type FormStep = 'form' | 'loading' | 'success' | 'error';
@@ -57,7 +58,7 @@ export default function PreinscriptionForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (submitting) return; // Prevent double submission
+    if (submitting) return;
     
     if (!validate()) return;
 
@@ -83,6 +84,10 @@ export default function PreinscriptionForm() {
       
       if (result.success) {
         setStep('success');
+        
+        // Envoyer automatiquement sur WhatsApp
+        const message = `Nouvelle préinscription LEBOULOT:\n\nNom: ${fullName}\nTéléphone: ${phoneResult.normalized}\nPays: ${selectedCountry?.name}\nProfil: ${profileType}\nDomaine: ${domain}`;
+        sendWhatsApp(message);
       } else {
         setStep('error');
         setError(result.error || 'Une erreur est survenue. Veuillez réessayer.');
@@ -110,15 +115,14 @@ export default function PreinscriptionForm() {
   };
 
   return (
-    <Section id="preinscription">
+    <section id="preinscription" className="py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-10">
-          <span className="text-leboulot-green text-sm font-semibold uppercase tracking-wider">Préinscription</span>
-          <h2 className="font-[family-name:var(--font-family-display)] text-3xl sm:text-4xl font-bold mt-3">
+          <h2 className="font-[family-name:var(--font-family-display)] text-3xl sm:text-4xl font-bold">
             Rejoignez la liste de lancement
           </h2>
           <p className="text-gray-400 mt-3">
-            Gratuit, sans engagement. Soyez parmi les premiers à découvrir LEBOULOT.
+            Gratuit, sans engagement. Soyez parmi les premiers.
           </p>
         </div>
 
@@ -241,24 +245,24 @@ export default function PreinscriptionForm() {
                     <button
                       type="button"
                       onClick={() => setPreferredChannel('whatsapp')}
-                      className={`flex-1 px-4 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center justify-center gap-2 ${
+                      className={`flex-1 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                         preferredChannel === 'whatsapp'
                           ? 'bg-leboulot-green text-black'
                           : 'bg-white/5 border border-white/10 text-gray-300 hover:border-leboulot-green/30'
                       }`}
                     >
-                      <span>💬</span> WhatsApp
+                      WhatsApp
                     </button>
                     <button
                       type="button"
                       onClick={() => setPreferredChannel('sms')}
-                      className={`flex-1 px-4 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center justify-center gap-2 ${
+                      className={`flex-1 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                         preferredChannel === 'sms'
                           ? 'bg-leboulot-green text-black'
                           : 'bg-white/5 border border-white/10 text-gray-300 hover:border-leboulot-green/30'
                       }`}
                     >
-                      <span>📱</span> SMS
+                      SMS
                     </button>
                   </div>
                 </div>
@@ -306,7 +310,7 @@ export default function PreinscriptionForm() {
               </button>
 
               <p className="text-xs text-gray-500 text-center">
-                Vos données sont protégées et ne seront jamais partagées avec des tiers.
+                Vos données sont protégées et ne seront jamais partagées.
               </p>
             </motion.form>
           )}
@@ -338,8 +342,7 @@ export default function PreinscriptionForm() {
               </div>
               <h3 className="text-2xl font-bold mb-3">Inscription confirmée !</h3>
               <p className="text-gray-400 mb-6">
-                Merci <strong className="text-white">{fullName}</strong> ! Vous faites maintenant partie de la liste de lancement LEBOULOT. 
-                Vous recevrez un message dès que la plateforme sera disponible.
+                Merci <strong className="text-white">{fullName}</strong> ! Vous faites maintenant partie de la liste de lancement LEBOULOT.
               </p>
               <button
                 onClick={resetForm}
@@ -382,16 +385,6 @@ export default function PreinscriptionForm() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
-    </Section>
-  );
-}
-
-function Section({ id, children, className = '' }: { id?: string; children: React.ReactNode; className?: string }) {
-  return (
-    <section id={id} className={`py-20 lg:py-28 px-4 sm:px-6 lg:px-8 ${className}`}>
-      <div className="max-w-7xl mx-auto">
-        {children}
       </div>
     </section>
   );

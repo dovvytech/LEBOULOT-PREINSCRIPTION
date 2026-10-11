@@ -39,7 +39,12 @@ export default function Admin() {
           className="glass-strong rounded-2xl p-8 w-full max-w-md"
         >
           <div className="text-center mb-8">
-            <span className="text-3xl">🔒</span>
+            <div className="w-12 h-12 rounded-full bg-leboulot-green/20 flex items-center justify-center mx-auto">
+              <svg className="w-6 h-6 text-leboulot-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+            </div>
             <h1 className="text-2xl font-bold mt-4 font-[family-name:var(--font-family-display)]">Espace Admin</h1>
             <p className="text-gray-400 text-sm mt-2">LEBOULOT — Back-office de gestion</p>
           </div>
@@ -176,7 +181,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
       <header className="border-b border-white/5 px-4 sm:px-6 lg:px-8 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="text-xl">⚡</span>
+            <span className="text-xl text-leboulot-green font-bold">L</span>
             <span className="font-[family-name:var(--font-family-display)] text-lg font-bold text-leboulot-green">LEBOULOT</span>
             <span className="text-sm text-gray-500 hidden sm:inline">— Back-office</span>
           </div>
@@ -263,7 +268,13 @@ function DashboardView({ stats }: { stats: AdminStats | null }) {
   if (!stats || stats.total === 0) {
     return (
       <div className="text-center py-20">
-        <div className="text-4xl mb-4">📊</div>
+        <div className="w-12 h-12 rounded-full bg-leboulot-green/20 flex items-center justify-center mx-auto mb-4">
+          <svg className="w-6 h-6 text-leboulot-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="18" y1="20" x2="18" y2="10" />
+            <line x1="12" y1="20" x2="12" y2="4" />
+            <line x1="6" y1="20" x2="6" y2="14" />
+          </svg>
+        </div>
         <h2 className="text-xl font-semibold mb-2">Aucune préinscription</h2>
         <p className="text-gray-400">Les statistiques apparaîtront ici dès les premières inscriptions.</p>
       </div>
@@ -417,7 +428,14 @@ function ContactsView({
   if (preinscriptions.length === 0) {
     return (
       <div className="text-center py-20">
-        <div className="text-4xl mb-4">👥</div>
+        <div className="w-12 h-12 rounded-full bg-leboulot-green/20 flex items-center justify-center mx-auto mb-4">
+          <svg className="w-6 h-6 text-leboulot-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+        </div>
         <h2 className="text-xl font-semibold mb-2">Aucun contact</h2>
         <p className="text-gray-400">Les préinscriptions apparaîtront ici.</p>
       </div>
@@ -621,7 +639,9 @@ function ContactsView({
                   </div>
                   <div>
                     <p className="text-xs text-gray-500">Consentement</p>
-                    <p>{selectedContact.consent_given ? '✅ Donné' : '❌ Non donné'}</p>
+                    <p className={selectedContact.consent_given ? 'text-leboulot-green' : 'text-red-400'}>
+                      {selectedContact.consent_given ? 'Donné' : 'Non donné'}
+                    </p>
                   </div>
                   <div>
                     <p className="text-xs text-gray-500">Date de consentement</p>
@@ -705,7 +725,7 @@ function ExportView({
             disabled={total === 0}
             className="px-6 py-3 bg-leboulot-green text-black font-semibold rounded-xl hover:bg-leboulot-green/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            📥 Télécharger Excel ({total} contact{total > 1 ? 's' : ''})
+            Télécharger Excel ({total} contact{total > 1 ? 's' : ''})
           </button>
           <span className="text-sm text-gray-400">
             Format .xlsx — Les téléphones sont au format texte
@@ -731,7 +751,7 @@ function ExportView({
           </p>
         </div>
         <p className="text-xs text-gray-500 mt-3">
-          ⚠️ Ce modèle est modifiable. L'envoi réel nécessite l'intégration d'un fournisseur WhatsApp Business ou SMS (voir documentation).
+          Ce modèle est modifiable. L'envoi réel nécessite l'intégration d'un fournisseur WhatsApp Business ou SMS (voir documentation).
         </p>
       </div>
 
@@ -747,7 +767,7 @@ function ExportView({
             <li>Respecter les réglementations locales sur les communications commerciales</li>
           </ol>
           <p className="mt-4 text-yellow-400/80">
-            ⚠️ N'ajoutez jamais de tokens API dans le frontend ou le dépôt Git.
+            N'ajoutez jamais de tokens API dans le frontend ou le dépôt Git.
           </p>
         </div>
       </div>
